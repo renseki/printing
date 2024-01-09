@@ -60,6 +60,7 @@ class PdfPreview extends StatefulWidget {
     this.padding,
     this.shouldRepaint = false,
     this.loadingWidget,
+    this.customShareButton,
     this.onPageFormatChanged,
     this.dpi,
   })  : _pagesBuilder = null,
@@ -117,6 +118,7 @@ class PdfPreview extends StatefulWidget {
     this.padding,
     this.shouldRepaint = false,
     this.loadingWidget,
+    this.customShareButton,
     this.onPageFormatChanged,
     this.dpi,
     required CustomPdfPagesBuilder pagesBuilder,
@@ -215,6 +217,8 @@ class PdfPreview extends StatefulWidget {
   /// Custom loading widget to use that is shown while PDF is being generated.
   /// If null, a [CircularProgressIndicator] is used instead.
   final Widget? loadingWidget;
+
+  final Widget? customShareButton;
 
   /// The page format has changed
   final ValueChanged<PdfPageFormat>? onPageFormatChanged;
@@ -340,7 +344,7 @@ class PdfPreviewState extends State<PdfPreview> {
     if (widget.useActions && widget.allowSharing && info?.canShare == true) {
       actions.add(PdfShareAction(
         filename: widget.pdfFileName,
-        icon: const Icon(Icons.download_rounded),
+        icon: widget.customShareButton,
         onShared:
             widget.onPrinted == null ? null : () => widget.onPrinted!(context),
       ));
