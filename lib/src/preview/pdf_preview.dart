@@ -340,6 +340,7 @@ class PdfPreviewState extends State<PdfPreview> {
     if (widget.useActions && widget.allowSharing && info?.canShare == true) {
       actions.add(PdfShareAction(
         filename: widget.pdfFileName,
+        icon: const Icon(Icons.download_rounded),
         onShared:
             widget.onPrinted == null ? null : () => widget.onPrinted!(context),
       ));
